@@ -7,4 +7,5 @@
 后端接口：http://www.example.com/api/weather
 
 架构图：
+
 ![](./assets/frontend-backend.drawio.png)
