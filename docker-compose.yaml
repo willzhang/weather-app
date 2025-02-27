@@ -1,0 +1,33 @@
+name: 'weather-app'
+
+services:
+  weather-frontend:
+    image: registry.cn-shenzhen.aliyuncs.com/cnmirror/weather-frontend:latest
+    container_name: weather-frontend
+    ports:
+      - "8080:80"
+    networks:
+      weather_network:
+
+  weather-backend:
+    image: registry.cn-shenzhen.aliyuncs.com/cnmirror/weather-backend:latest
+    container_name: weather-backend
+    ports:
+      - "3000:3000"
+    networks:
+      weather_network:
+
+  weather-nginx:
+    image: registry.cn-shenzhen.aliyuncs.com/cnmirror/weather-nginx:latest
+    container_name: weather-nginx
+    ports:
+      - "80:80"
+    networks:
+      weather_network:
+    depends_on:
+      - weather-frontend
+      - weather-backend
+
+networks:
+  weather_network:
+    driver: bridge

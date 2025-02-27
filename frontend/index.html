@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>获取天气</title>
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #weather {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .success { background-color: #dff0d8; color: #3c763d; }
+        .error { background-color: #f2dede; color: #a94442; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>天气查询</h2>
+        <button onclick="getWeather()">获取天气</button>
+        <div id="weather"></div>
+    </div>
+
+    <script>
+        async function getWeather() {
+            const weatherDiv = document.getElementById('weather');
+            
+            try {
+                const response = await fetch('/api/weather');
+                const data = await response.json();
+
+                weatherDiv.style.display = 'block';
+                weatherDiv.className = 'success';
+                weatherDiv.innerText = `当前天气：${data.temperature}°C，${data.condition}`;
+            } catch (error) {
+                weatherDiv.style.display = 'block';
+                weatherDiv.className = 'error';
+                weatherDiv.innerText = '获取天气失败，请稍后重试！';
+                console.error('天气请求失败:', error);
+            }
+        }
+    </script>
+</body>
+</html>
