@@ -7,4 +7,4 @@
 后端接口：http://192.168.72.16/api/weather
 
 架构图：
-[](./assets/frontend-backend.drawio.png)
+![](./assets/frontend-backend.drawio.png)
